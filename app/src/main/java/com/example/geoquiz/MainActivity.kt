@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun QuizScreen(modifier: Modifier = Modifier){
-    var answered by remember { mutableStateOf(false) }
-    var showResultDialog by remember { mutableStateOf(false) }
+    //var answered by remember { mutableStateOf(false) }
+    //var showResultDialog by remember { mutableStateOf(false) }
 
 
 
