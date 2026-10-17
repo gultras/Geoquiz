@@ -52,6 +52,11 @@ class QuizViewModel : ViewModel() {
         return isCorrect
     }
 
+    fun reset() {
+        currentIndex = 0
+        correctAnswers = 0
+    }
+
 }
 
 class MainActivity : ComponentActivity() {
