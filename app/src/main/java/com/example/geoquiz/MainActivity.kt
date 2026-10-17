@@ -41,6 +41,17 @@ class QuizViewModel : ViewModel() {
     val currentQuestion: Question get() = questionBank[currentIndex]
     val questionCount: Int get() = questionBank.size
     val isLastQuestion: Boolean get() = currentIndex == questionBank.lastIndex
+
+    fun moveToNext() {
+        if (!isLastQuestion) currentIndex++
+    }
+
+    fun checkAnswer(userAnswer: Boolean): Boolean {
+        val isCorrect = userAnswer == currentQuestion.answer
+        if (isCorrect) correctAnswers++
+        return isCorrect
+    }
+
 }
 
 class MainActivity : ComponentActivity() {
