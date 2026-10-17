@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
@@ -31,6 +33,14 @@ class QuizViewModel : ViewModel() {
         Question("Lake Baikal is the world's oldest and deepest freshwater lake.", true)
     )
 
+    var currentIndex by mutableStateOf(0)
+        private set
+
+    var correctAnswers by mutableStateOf(0)
+        private set
+    val currentQuestion: Question get() = questionBank[currentIndex]
+    val questionCount: Int get() = questionBank.size
+    val isLastQuestion: Boolean get() = currentIndex == questionBank.lastIndex
 }
 
 class MainActivity : ComponentActivity() {
@@ -49,8 +59,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun QuizScreen(modifier: Modifier = Modifier){
-    //var answered by remember { mutableStateOf(false) }
-    //var showResultDialog by remember { mutableStateOf(false) }
+    var answered by remember { mutableStateOf(false) }
+    var showResultDialog by remember { mutableStateOf(false) }
 
 
 
