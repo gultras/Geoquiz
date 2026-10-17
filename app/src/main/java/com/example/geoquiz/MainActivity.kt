@@ -101,18 +101,22 @@ fun QuizScreen(modifier: Modifier = Modifier,
     }
     Column(modifier = Modifier
             .fillMaxSize()) {
-    Box(
+    Row(
         modifier = Modifier.padding(bottom = 16.dp)
             .fillMaxWidth()
             .background(Color.Magenta),
-        contentAlignment = Alignment.Center
+        //verticalArrangement = Arrangement.SpaceEvenly
+
+       // contentAlignment = Alignment.CenterStart
     ) {
         Text(
             text = "Geoquiz",
             style = MaterialTheme.typography.displayMedium,
             color = Color.White,
-            textAlign = TextAlign.Start,
-            modifier = Modifier.padding(bottom = 24.dp)
+            //textAlign = TextAlign.Start,
+            modifier = Modifier
+                .padding(bottom = 24.dp, top = 24.dp)
+                //.align(Alignment.CenterVertically)
 
 
         )
