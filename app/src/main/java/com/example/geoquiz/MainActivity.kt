@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -76,15 +77,17 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GeoquizTheme {
-                    QuizScreen()
-
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    QuizScreen(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
 }
 
 @Composable
-fun QuizScreen(viewModel: QuizViewModel = viewModel()){
+fun QuizScreen(modifier: Modifier = Modifier,
+               viewModel: QuizViewModel = viewModel()){
     var answered by remember { mutableStateOf(false) }
     var showResultDialog by remember { mutableStateOf(false) }
     LaunchedEffect(viewModel.currentIndex) {
@@ -95,8 +98,8 @@ fun QuizScreen(viewModel: QuizViewModel = viewModel()){
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        //horizontalAlignment = Alignment.CenterHorizontally,
+       // verticalArrangement = Arrangement.Center
     ) {
         Text(
             text = viewModel.currentQuestion.text,
@@ -122,13 +125,28 @@ fun QuizScreen(viewModel: QuizViewModel = viewModel()){
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        if (!viewModel.isLastQuestion) {
+            Button(
+                onClick = { viewModel.moveToNext() },
+                enabled = answered,
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Next") }
+
+        } else if (answered) {
+            Button(
+                onClick = { showResultDialog = true },
+                modifier = Modifier.fillMaxWidth()
+            ) { Text("Show result") }
+        }
+    }
+
 
 
 
     }
 
 
-}
+
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
