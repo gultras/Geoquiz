@@ -85,6 +85,7 @@ class MainActivity : ComponentActivity() {
             GeoquizTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     QuizScreen(modifier = Modifier.padding(innerPadding))
+                    //final
                 }
             }
         }
