@@ -13,11 +13,25 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModel
 import com.example.geoquiz.ui.theme.GeoquizTheme
 data class Question(
     val text: String,
     val answer: Boolean
 )
+
+class QuizViewModel : ViewModel() {
+
+    private val questionBank = listOf(
+        Question("Canberra is the capital of Australia.", true),
+        Question("The Pacific Ocean is larger than the Atlantic Ocean.", true),
+        Question("The Suez Canal connects the Red Sea and the Indian Ocean.", false),
+        Question("The source of the Nile River is in Egypt.", false),
+        Question("The Amazon River is the longest river in the Americas.", true),
+        Question("Lake Baikal is the world's oldest and deepest freshwater lake.", true)
+    )
+
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
