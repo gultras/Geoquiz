@@ -16,6 +16,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.geoquiz.ui.theme.GeoquizTheme
 data class Question(
     val text: String,
@@ -56,7 +58,6 @@ class QuizViewModel : ViewModel() {
         currentIndex = 0
         correctAnswers = 0
     }
-
 }
 
 class MainActivity : ComponentActivity() {
@@ -65,16 +66,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GeoquizTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    QuizScreen(modifier = Modifier.padding(innerPadding))
-                }
+                    QuizScreen()
+
             }
         }
     }
 }
 
 @Composable
-fun QuizScreen(modifier: Modifier = Modifier){
+fun QuizScreen(viewModel: QuizViewModel = viewModel()){
     var answered by remember { mutableStateOf(false) }
     var showResultDialog by remember { mutableStateOf(false) }
 
